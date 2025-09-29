@@ -3,32 +3,41 @@ package com.aplication.pharmacysystem.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long productId;
-
+    private Long productID;
     private String name;
     private String description;
-    private Double price;
-    private Integer quantityInStock;
-    private String supplier;
+    private double price;
+    private int quantityInStock;
 
-    public Long getProductId() {
-        return productId;
+    @ManyToOne
+    @JoinColumn(name = "userID")
+    private Fondateur fondateur;
+
+    public Fondateur getFondateur() {
+        return fondateur;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setFondateur(Fondateur fondateur) {
+        this.fondateur = fondateur;
     }
 
-    public String getName() {
-        return name;
+    public int getQuantityInStock() {
+        return quantityInStock;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setQuantityInStock(int quantityInStock) {
+        this.quantityInStock = quantityInStock;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getDescription() {
@@ -39,40 +48,31 @@ public class Product {
         this.description = description;
     }
 
-    public Double getPrice() {
-        return price;
+    public String getName() {
+        return name;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Integer getQuantityInStock() {
-        return quantityInStock;
+    public Long getProductID() {
+        return productID;
     }
 
-    public void setQuantityInStock(Integer quantityInStock) {
-        this.quantityInStock = quantityInStock;
+    public void setProductID(Long productID) {
+        this.productID = productID;
     }
 
-    public String getSupplier() {
-        return supplier;
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productID=" + productID +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", quantityInStock=" + quantityInStock +
+                ", fondateur=" + fondateur +
+                '}';
     }
-
-    public void setSupplier(String supplier) {
-        this.supplier = supplier;
-    }
-
-    public Fondateur getFondateur() {
-        return fondateur;
-    }
-
-    public void setFondateur(Fondateur fondateur) {
-        this.fondateur = fondateur;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "fondateur_id")
-    private Fondateur fondateur;
-
 }
