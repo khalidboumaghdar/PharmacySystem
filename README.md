@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #  Pharmacy Management System
 
 ##  Description
@@ -30,3 +31,7 @@ flowchart TD
     A[Frontend - Angular] -->|HTTP/JSON| B[Backend - Spring Boot REST API]
     B --> C[(Base de données MySQL)]
 
+=======
+
+![Screenshot 2025-09-29 145800.png](../../../Downloads/Screenshot%202025-09-29%20145800.png)
+>>>>>>> 9f55eac6efa4d5d1ffa2cfa88c1faf277eaecbda
