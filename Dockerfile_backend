@@ -1,0 +1,16 @@
+FROM eclipse-temurin:17-jdk-alpine
+WORKDIR /app
+
+# Installer Maven
+RUN apk add --no-cache maven git bash
+
+# Copier le projet
+COPY pom.xml .
+COPY src ./src
+
+# Build avec Maven installé
+RUN mvn clean package -DskipTests
+
+EXPOSE 8080
+
+CMD ["java", "-jar", "target/PharmacySystem-0.0.1-SNAPSHOT.jar"]

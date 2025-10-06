@@ -1,5 +1,7 @@
 package com.aplication.pharmacysystem.Controller;
 
+import com.aplication.pharmacysystem.DTO.AuthenticationRequest;
+import com.aplication.pharmacysystem.DTO.AuthenticationResponse;
 import com.aplication.pharmacysystem.Service.FondateurService;
 import com.aplication.pharmacysystem.DTO.FondateurDTO;
 import com.aplication.pharmacysystem.DTO.FondateurCreateDTO;
@@ -11,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/fondateurs")
+@CrossOrigin(origins = "http://localhost:4200")
 public class FondateurController {
 
     @Autowired
@@ -19,6 +22,14 @@ public class FondateurController {
     @PostMapping
     public ResponseEntity<FondateurDTO> create(@RequestBody FondateurCreateDTO dto) {
         return ResponseEntity.ok(fondateurService.create(dto));
+    }
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request) {
+        AuthenticationResponse response = fondateurService.login(request);
+        if (response == null) {
+            return ResponseEntity.status(401).build(); // Unauthorized
+        }
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping

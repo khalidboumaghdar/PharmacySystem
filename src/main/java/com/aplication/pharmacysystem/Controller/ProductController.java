@@ -3,22 +3,25 @@ package com.aplication.pharmacysystem.Controller;
 import com.aplication.pharmacysystem.Service.ProductService;
 import com.aplication.pharmacysystem.DTO.ProductDTO;
 import com.aplication.pharmacysystem.DTO.ProductCreateDTO;
+import com.aplication.pharmacysystem.model.Fondateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
     @PostMapping
-    public ResponseEntity<ProductDTO> create(@RequestBody ProductCreateDTO dto) {
-        return ResponseEntity.ok(productService.createProduct(dto));
+    public ResponseEntity<ProductDTO> create(@RequestBody ProductCreateDTO dto, @AuthenticationPrincipal Fondateur user) {
+        return ResponseEntity.ok(productService.createProduct(dto,user));
     }
 
     @GetMapping

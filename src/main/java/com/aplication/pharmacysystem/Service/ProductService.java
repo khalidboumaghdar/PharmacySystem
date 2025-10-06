@@ -2,12 +2,13 @@ package com.aplication.pharmacysystem.Service;
 
 import com.aplication.pharmacysystem.DTO.ProductDTO;
 import com.aplication.pharmacysystem.DTO.ProductCreateDTO;
+import com.aplication.pharmacysystem.model.Fondateur;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
-    ProductDTO createProduct(ProductCreateDTO dto);
+    ProductDTO createProduct(ProductCreateDTO dto, Fondateur user);
     List<ProductDTO> getAllProducts();
     Optional<ProductDTO> getProduct(Long id);
     ProductDTO updateProduct(Long id, ProductCreateDTO dto);

@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # Frontend Angular
+  frontend:
+    build:
+      context: ./frontend/PharmacySystem
+      dockerfile: Dockerfile_fronted
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./frontend/PharmacySystem:/app
+    depends_on:
+      - backend
+
+  # Backend Spring Boot
+  backend:
+    build:
+      context: ./
+      dockerfile: Dockerfile_backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/pharmacy
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: pass
+    depends_on:
+      - db
+
+  # Base de données MySQL
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: pharmacy
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

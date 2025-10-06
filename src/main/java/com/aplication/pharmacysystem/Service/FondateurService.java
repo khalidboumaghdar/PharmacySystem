@@ -1,5 +1,7 @@
 package com.aplication.pharmacysystem.Service;
 
+import com.aplication.pharmacysystem.DTO.AuthenticationRequest;
+import com.aplication.pharmacysystem.DTO.AuthenticationResponse;
 import com.aplication.pharmacysystem.DTO.FondateurDTO;
 import com.aplication.pharmacysystem.DTO.FondateurCreateDTO;
 
@@ -12,4 +14,6 @@ public interface FondateurService {
     Optional<FondateurDTO> getById(Long id);
     FondateurDTO update(Long id, FondateurCreateDTO dto);
     void delete(Long id);
+    AuthenticationResponse login(AuthenticationRequest request);
+
 }

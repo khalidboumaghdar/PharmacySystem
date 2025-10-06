@@ -1,6 +1,7 @@
 package com.aplication.pharmacysystem.Service;
 
 import com.aplication.pharmacysystem.Repository.ProductRepository;
+import com.aplication.pharmacysystem.model.Fondateur;
 import com.aplication.pharmacysystem.model.Product;
 import com.aplication.pharmacysystem.DTO.ProductDTO;
 import com.aplication.pharmacysystem.DTO.ProductCreateDTO;
@@ -18,12 +19,13 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepo;
 
     @Override
-    public ProductDTO createProduct(ProductCreateDTO dto) {
+    public ProductDTO createProduct(ProductCreateDTO dto,Fondateur fondateur) {
         Product product = new Product();
         product.setName(dto.getName());
         product.setDescription(dto.getDescription());
         product.setPrice(dto.getPrice());
         product.setQuantityInStock(dto.getQuantityInStock());
+        product.setFondateur(fondateur);
 
         Product saved = productRepo.save(product);
         return convertToDTO(saved);
