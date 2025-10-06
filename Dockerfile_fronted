@@ -1,0 +1,21 @@
+# Utiliser Node.js
+FROM node:18
+
+# Créer le répertoire de travail
+WORKDIR /app
+
+# Copier package.json et package-lock.json
+COPY package*.json ./
+
+# Installer les dépendances
+RUN npm install -g @angular/cli@16
+RUN npm install
+
+# Copier le reste du projet
+COPY . .
+
+# Exposer le port 4200
+EXPOSE 4200
+
+# Lancer l'application avec ng serve
+CMD ["ng", "serve", "--host", "0.0.0.0"]
